@@ -1,6 +1,9 @@
 package tdd.huffman;
 
 import com.google.common.collect.ImmutableList;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Value;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -8,13 +11,10 @@ import java.util.function.Consumer;
 import static tdd.huffman.Bit.one;
 import static tdd.huffman.Bit.zero;
 
+@Value
 public class HuffmanTree {
 
     private final BinaryTree<Byte> binaryTree;
-
-    public HuffmanTree(BinaryTree<Byte> binaryTree) {
-        this.binaryTree = binaryTree;
-    }
 
     public List<Bit> findHuffmanCodeForSymbol(Byte symbol) {
         var ref = new Object() {
@@ -25,6 +25,10 @@ public class HuffmanTree {
                 symbol,
                 foundHuffmanCode -> ref.huffmanCode = foundHuffmanCode);
         return ref.huffmanCode;
+    }
+
+    public void visit(Consumer<BinaryTree<Byte>> nodeConsumer) {
+        this.binaryTree.visit(nodeConsumer);
     }
 
     private void recursiveFindHuffmanCodeForSymbol(BinaryTree<Byte> node,

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toSet;
@@ -90,19 +91,25 @@ class HuffmanTreeBuilderTest {
     private void thenHuffmanTreeShouldBeBuilt() {
         symbolWeightMap.forEach((symbol, weight) -> {
             List<Bit> huffmanCode = huffmanTree.findHuffmanCodeForSymbol(symbol);
-
-            var heavierSymbols = symbolWeightMap.entrySet().stream()
-                    .filter(symbolWeightEntry ->
-                            !symbolWeightEntry.getKey().equals(symbol) && symbolWeightEntry.getValue() > weight)
-                    .collect(toSet());
-
-            if (!heavierSymbols.isEmpty()) {
-                assertThat(heavierSymbols).allMatch(symbolWeightEntry -> {
-                    List<Bit> otherHuffmanCode = huffmanTree.findHuffmanCodeForSymbol(symbolWeightEntry.getKey());
-                    return otherHuffmanCode.size() <= huffmanCode.size();
-                });
-            }
+            var heavierSymbols = filterHeavierSymbols(symbol, weight);
+            thenHeavierSymbolsHaveShorterHuffmanCodes(huffmanCode, heavierSymbols);
         });
+    }
+
+    private void thenHeavierSymbolsHaveShorterHuffmanCodes(List<Bit> huffmanCode, Set<Map.Entry<Byte, Long>> heavierSymbols) {
+        if (!heavierSymbols.isEmpty()) {
+            assertThat(heavierSymbols).allMatch(symbolWeightEntry -> {
+                List<Bit> otherHuffmanCode = huffmanTree.findHuffmanCodeForSymbol(symbolWeightEntry.getKey());
+                return otherHuffmanCode.size() <= huffmanCode.size();
+            });
+        }
+    }
+
+    private Set<Map.Entry<Byte, Long>> filterHeavierSymbols(Byte symbol, Long weight) {
+        return symbolWeightMap.entrySet().stream()
+                .filter(symbolWeightEntry ->
+                        !symbolWeightEntry.getKey().equals(symbol) && symbolWeightEntry.getValue() > weight)
+                .collect(toSet());
     }
 
     private void whenBuildingHuffmanTree() {
