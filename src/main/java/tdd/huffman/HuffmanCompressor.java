@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.joining;
 import static tdd.huffman.Bit.one;
 import static tdd.huffman.Bit.zero;
 
@@ -23,6 +24,10 @@ public class HuffmanCompressor {
     }
 
     public void compress(InputStream inputStream, OutputStream outputStream) throws IOException {
+        compress(inputStream, outputStream, false);
+    }
+
+    public void compress(InputStream inputStream, OutputStream outputStream, boolean verbose) throws IOException {
         Map<Byte, Long> symbolWeightMap = symbolWeightMapBuilder.build(inputStream);
 
         long inputSize = calculateInputSize(symbolWeightMap);
@@ -40,14 +45,16 @@ public class HuffmanCompressor {
             HuffmanTree huffmanTree = huffmanTreeBuilder.build(symbolWeightMap);
             bitOutputStream.writeLong(inputSize);
             huffmanTreeSerializer.serialize(huffmanTree, bitOutputStream);
-            compressInputSymbols(inputStream, huffmanTree, bitOutputStream);
+            compressInputSymbols(inputStream, huffmanTree, bitOutputStream, symbolWeightMap, verbose);
         }
         bitOutputStream.flush();
     }
 
     private void compressInputSymbols(InputStream inputStream,
                                       HuffmanTree huffmanTree,
-                                      BitOutputStream bitOutputStream) throws IOException {
+                                      BitOutputStream bitOutputStream,
+                                      Map<Byte, Long> symbolWeightMap,
+                                      boolean verbose) throws IOException {
         int readByte;
         Map<Byte, List<Bit>> huffmanCodeCache = new HashMap<>();
         while ((readByte = inputStream.read()) != -1) {
@@ -55,6 +62,15 @@ public class HuffmanCompressor {
             for (Bit bit : symbolHuffmanCode) {
                 bitOutputStream.write(bit);
             }
+        }
+
+        if (verbose) {
+            symbolWeightMap.entrySet()
+                    .stream().sorted((o1, o2) -> o2.getValue().compareTo(o1.getValue()))
+                    .forEach(entry -> System.out.printf("[ASCII 0x%2X] [freq: %5d] [code: %s]%n",
+                            entry.getKey(),
+                            entry.getValue(),
+                            huffmanCodeCache.get(entry.getKey()).stream().map(Bit::toString).collect(joining())));
         }
     }
 

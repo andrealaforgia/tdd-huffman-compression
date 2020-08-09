@@ -7,17 +7,19 @@ public class Bit {
     byte value;
 
     public static Bit zero() {
-        return new Bit((byte)0);
+        return new Bit((byte) 0);
     }
 
     public static Bit one() {
-        return new Bit((byte)1);
+        return new Bit((byte) 1);
     }
 
     public static Bit valueOf(int value) {
         switch (value) {
-            case 0: return zero();
-            case 1: return one();
+            case 0:
+                return zero();
+            case 1:
+                return one();
         }
         throw new IllegalArgumentException(String.format("Could not convert %d to bit", value));
     }
@@ -32,5 +34,9 @@ public class Bit {
 
     public boolean isOne() {
         return this.value == 1;
+    }
+
+    public String toString() {
+        return "" + this.value;
     }
 }

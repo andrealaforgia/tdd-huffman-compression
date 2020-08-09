@@ -1,6 +1,5 @@
 package tdd.huffman;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,5 +33,11 @@ class BitTest {
         assertThatThrownBy(() -> Bit.valueOf(2))
                 .as("Could not convert 2 to bit")
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void shouldTransformBitToString() {
+        assertThat("" + zero()).isEqualTo("0");
+        assertThat("" + one()).isEqualTo("1");
     }
 }
