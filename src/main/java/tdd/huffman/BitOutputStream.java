@@ -31,7 +31,7 @@ public class BitOutputStream {
 
     public void writeByte(Byte aByte) throws IOException {
         for (int i = 0; i < 8; i++) {
-            write(((aByte & (1 << 7 - i)) >> (7 - i)) == 0 ? zero() : one());
+            write(Bit.valueOf((aByte & (1 << 7 - i)) >> (7 - i)));
         }
     }
 

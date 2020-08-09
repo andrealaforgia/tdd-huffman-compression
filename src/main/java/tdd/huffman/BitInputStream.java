@@ -29,7 +29,7 @@ public class BitInputStream {
             countOfBitsReadFromBuffer = 0;
         }
         byte nextBit = (byte) ((buffer >> (7 - countOfBitsReadFromBuffer++)) & 1);
-        return Optional.of(nextBit == 1 ? one() : zero());
+        return Optional.of(Bit.valueOf(nextBit));
     }
 
     public Bit expectBit() throws IOException {

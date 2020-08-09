@@ -14,6 +14,14 @@ public class Bit {
         return new Bit((byte)1);
     }
 
+    public static Bit valueOf(int value) {
+        switch (value) {
+            case 0: return zero();
+            case 1: return one();
+        }
+        throw new IllegalArgumentException(String.format("Could not convert %d to bit", value));
+    }
+
     private Bit(byte value) {
         this.value = value;
     }
