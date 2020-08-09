@@ -3,8 +3,11 @@ package tdd.huffman;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import static tdd.huffman.Bit.one;
 import static tdd.huffman.Bit.zero;
@@ -48,8 +51,9 @@ public class HuffmanCompressor {
                                       HuffmanTree huffmanTree,
                                       BitOutputStream bitOutputStream) throws IOException {
         int readByte;
+        Map<Byte, List<Bit>> huffmanCodeCache = new HashMap<>();
         while ((readByte = inputStream.read()) != -1) {
-            List<Bit> symbolHuffmanCode = huffmanTree.findHuffmanCodeForSymbol((byte) readByte);
+            List<Bit> symbolHuffmanCode = huffmanCodeCache.computeIfAbsent((byte)readByte, huffmanTree::findHuffmanCodeForSymbol);
             for (Bit bit : symbolHuffmanCode) {
                 bitOutputStream.write(bit);
             }
