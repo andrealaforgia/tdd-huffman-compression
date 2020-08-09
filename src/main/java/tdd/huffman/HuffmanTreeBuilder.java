@@ -41,8 +41,8 @@ public class HuffmanTreeBuilder {
     }
 
     @Value
-    public class WeightedNode {
-        private BinaryTree<Byte> node;
-        private long weight;
+    public static class WeightedNode {
+        BinaryTree<Byte> node;
+        long weight;
     }
 }

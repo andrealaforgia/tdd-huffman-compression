@@ -16,7 +16,7 @@ class HuffmanCompressorTest {
 
     private ByteArrayInputStream inputStream;
     private ByteArrayOutputStream outputStream;
-    private HuffmanCompressor huffmanCompressor = new HuffmanCompressor(
+    private final HuffmanCompressor huffmanCompressor = new HuffmanCompressor(
             new SymbolWeightMapBuilder(),
             new HuffmanTreeBuilder(),
             new HuffmanTreeSerializer()

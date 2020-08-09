@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SymbolWeightMapBuilderTest {
 
-    private SymbolWeightMapBuilder symbolWeightMapBuilder = new SymbolWeightMapBuilder();
+    private final SymbolWeightMapBuilder symbolWeightMapBuilder = new SymbolWeightMapBuilder();
     private InputStream inputStream;
     private Map<Byte, Long> builtMap;
 

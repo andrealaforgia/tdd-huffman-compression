@@ -13,9 +13,8 @@ import static tdd.huffman.Bit.zero;
 class HuffmanTreeDeserializerTest {
 
     private HuffmanTree huffmanTree;
-    private ByteArrayInputStream byteArrayInputStream;
     private BitInputStream bitInputStream;
-    private HuffmanTreeDeserializer huffmanTreeDeserializer = new HuffmanTreeDeserializer();
+    private final HuffmanTreeDeserializer huffmanTreeDeserializer = new HuffmanTreeDeserializer();
 
     @Test
     public void shouldSerializeHuffmanTree() throws IOException {
@@ -43,7 +42,7 @@ class HuffmanTreeDeserializerTest {
         bitOutputStream.write(one());
         bitOutputStream.writeByte((byte) 'E');
         bitOutputStream.flush();
-        byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         bitInputStream = new BitInputStream(byteArrayInputStream);
     }
 

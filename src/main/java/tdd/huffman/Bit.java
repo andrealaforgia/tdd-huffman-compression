@@ -4,7 +4,7 @@ import lombok.Value;
 
 @Value
 public class Bit {
-    private final byte value;
+    byte value;
 
     public static Bit zero() {
         return new Bit((byte)0);

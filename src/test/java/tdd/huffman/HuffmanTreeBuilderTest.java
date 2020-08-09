@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HuffmanTreeBuilderTest {
 
     private Map<Byte, Long> symbolWeightMap;
-    private HuffmanTreeBuilder huffmanTreeBuilder = new HuffmanTreeBuilder();
+    private final HuffmanTreeBuilder huffmanTreeBuilder = new HuffmanTreeBuilder();
     private HuffmanTree huffmanTree;
 
     private static Stream<Arguments> provideArguments() {

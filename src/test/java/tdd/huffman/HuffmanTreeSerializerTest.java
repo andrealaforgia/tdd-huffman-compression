@@ -12,9 +12,9 @@ import static tdd.huffman.Bit.zero;
 class HuffmanTreeSerializerTest {
 
     private HuffmanTree huffmanTree;
-    private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-    private BitOutputStream bitOutputStream = new BitOutputStream(byteArrayOutputStream);
-    private HuffmanTreeSerializer huffmanTreeSerializer = new HuffmanTreeSerializer();
+    private final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    private final BitOutputStream bitOutputStream = new BitOutputStream(byteArrayOutputStream);
+    private final HuffmanTreeSerializer huffmanTreeSerializer = new HuffmanTreeSerializer();
 
     @Test
     public void shouldSerializeHuffmanTree() throws IOException {

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BinaryTreeTest {
 
     private BinaryTree<Integer> node;
-    private List<BinaryTree<Integer>> visitedNodes = new ArrayList<>();
+    private final List<BinaryTree<Integer>> visitedNodes = new ArrayList<>();
 
     @Test
     void shouldCreateATerminalNode() {
@@ -29,10 +29,10 @@ class BinaryTreeTest {
     void shouldVisitTree() {
         givenABinaryTree();
         whenVisitingTheBinaryTree();
-        thenTheBinaryTreeShoudlBeVisited();
+        thenTheBinaryTreeShouldBeVisited();
     }
 
-    void thenTheBinaryTreeShoudlBeVisited() {
+    void thenTheBinaryTreeShouldBeVisited() {
         assertThat(visitedNodes).isEqualTo(asList(
                 node,
                 node.getLeftNode(),

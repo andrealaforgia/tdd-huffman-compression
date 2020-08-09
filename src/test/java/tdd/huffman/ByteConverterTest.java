@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ByteConverterTest {
 
-    private static byte[] ARRAY_OF_BYTES = new byte[] {
+    private static final byte[] ARRAY_OF_BYTES = new byte[] {
             (byte) 0b10101010,
             (byte) 0b01010101,
             (byte) 0b00101000,
@@ -19,7 +19,7 @@ class ByteConverterTest {
 
     private static final long LONG = -6172983662199101424L;
 
-    private ByteConverter byteConverter = new ByteConverter();
+    private final ByteConverter byteConverter = new ByteConverter();
 
     @Test
     void shouldConvertLongToBytes() {

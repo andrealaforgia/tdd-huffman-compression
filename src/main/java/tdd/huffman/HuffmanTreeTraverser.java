@@ -1,7 +1,5 @@
 package tdd.huffman;
 
-import javax.swing.plaf.IconUIResource;
-
 public class HuffmanTreeTraverser {
     private final HuffmanTree huffmanTree;
     private BinaryTree<Byte> cursor;

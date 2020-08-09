@@ -10,9 +10,9 @@ import java.util.function.Consumer;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BinaryTree<T> {
 
-    private final T nodeValue;
-    private final BinaryTree<T> leftNode;
-    private final BinaryTree<T> rightNode;
+    T nodeValue;
+    BinaryTree<T> leftNode;
+    BinaryTree<T> rightNode;
 
     public static<T> BinaryTree<T> newTerminalNode(T nodeValue) {
         return new BinaryTree<>(nodeValue, null, null);
