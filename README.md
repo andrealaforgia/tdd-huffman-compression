@@ -18,4 +18,4 @@ Part 7 - https://medium.com/@a.laforgia/a-test-driven-implementation-of-huffman-
 
 Part 8 - https://medium.com/@a.laforgia/a-test-driven-implementation-of-huffman-data-compression-part-8-64107bc6c9bd
 
-Part 9 -
+Part 9 - https://medium.com/@a.laforgia/a-test-driven-implementation-of-huffman-data-compression-part-9-final-9fb292e7b4c4
