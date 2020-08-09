@@ -30,7 +30,7 @@ class BitInputStreamTest {
     private final List<Bit> readBits = new ArrayList<>();
 
     @Test
-    public void shouldReadBitsAsExpected() throws IOException {
+    void shouldReadBitsAsExpected() throws IOException {
         givenAnBufferContainingSomeBytes();
         whenReadingTheSingleBitsInTheBuffer();
         thenTheSingleBitsShouldBeReadAsExpected();

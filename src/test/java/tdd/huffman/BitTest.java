@@ -12,13 +12,13 @@ class BitTest {
     public static final Bit ONE = one();
 
     @Test
-    public void shouldBuildBitAsExpected() {
+    void shouldBuildBitAsExpected() {
         assertThat(ZERO.getValue()).isEqualTo((byte)0);
         assertThat(ONE.getValue()).isEqualTo((byte)1);
     }
 
     @Test
-    public void shouldRecognizeBit() {
+    void shouldRecognizeBit() {
         assertThat(ZERO.isZero()).isTrue();
         assertThat(ZERO.isOne()).isFalse();
         assertThat(ONE.isZero()).isFalse();

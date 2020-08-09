@@ -53,19 +53,19 @@ class BitOutputStreamTest {
     }
 
     @Test
-    public void shouldWriteBitsAsExpected() throws IOException {
+    void shouldWriteBitsAsExpected() throws IOException {
         whenWritingSomeBits();
         thenTheBitsAreWrittenAsExpected();
     }
 
     @Test
-    public void shouldWriteByteAsExpected() throws IOException {
+    void shouldWriteByteAsExpected() throws IOException {
         whenWritingAByte();
         thenTheByteIsWrittenAsExpected();
     }
 
     @Test
-    public void shouldWriteLongAsExpected() throws IOException {
+    void shouldWriteLongAsExpected() throws IOException {
         whenWritingALong();
         thenTheLongIsWrittenAsExpected();
     }

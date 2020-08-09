@@ -17,7 +17,7 @@ class HuffmanTreeSerializerTest {
     private final HuffmanTreeSerializer huffmanTreeSerializer = new HuffmanTreeSerializer();
 
     @Test
-    public void shouldSerializeHuffmanTree() throws IOException {
+    void shouldSerializeHuffmanTree() throws IOException {
         givenHuffmanTree();
         whenSerializingHuffmanTree();
         thenHuffmanTreeShouldBeSerialized();
