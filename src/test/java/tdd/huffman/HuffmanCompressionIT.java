@@ -99,9 +99,11 @@ class HuffmanCompressionIT {
             new HuffmanTreeBuilder(),
             new HuffmanTreeSerializer()
     );
+
     private final HuffmanDecompressor huffmanDecompressor = new HuffmanDecompressor(
             new HuffmanTreeDeserializer()
     );
+
     private final ByteArrayOutputStream compressedStream = new ByteArrayOutputStream();
 
     @Test

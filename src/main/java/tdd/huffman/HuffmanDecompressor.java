@@ -1,17 +1,16 @@
 package tdd.huffman;
 
+import lombok.RequiredArgsConstructor;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class HuffmanDecompressor {
 
     private final HuffmanTreeDeserializer huffmanTreeDeserializer;
-
-    public HuffmanDecompressor(HuffmanTreeDeserializer huffmanTreeDeserializer) {
-        this.huffmanTreeDeserializer = huffmanTreeDeserializer;
-    }
 
     public void decompress(InputStream inputStream, OutputStream outputStream) throws IOException {
         BitInputStream bitInputStream = new BitInputStream(inputStream);

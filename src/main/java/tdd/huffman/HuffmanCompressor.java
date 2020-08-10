@@ -1,5 +1,7 @@
 package tdd.huffman;
 
+import lombok.RequiredArgsConstructor;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,17 +13,15 @@ import static java.util.stream.Collectors.joining;
 import static tdd.huffman.Bit.one;
 import static tdd.huffman.Bit.zero;
 
+@RequiredArgsConstructor
 public class HuffmanCompressor {
+
+    public static final Bit SINGLE_SYMBOL_INDICATOR = zero();
+    public static final Bit MULTIPLE_SYMBOLS_INDICATOR = one();
 
     private final SymbolWeightMapBuilder symbolWeightMapBuilder;
     private final HuffmanTreeBuilder huffmanTreeBuilder;
     private final HuffmanTreeSerializer huffmanTreeSerializer;
-
-    public HuffmanCompressor(SymbolWeightMapBuilder symbolWeightMapBuilder, HuffmanTreeBuilder huffmanTreeBuilder, HuffmanTreeSerializer huffmanTreeSerializer) {
-        this.symbolWeightMapBuilder = symbolWeightMapBuilder;
-        this.huffmanTreeBuilder = huffmanTreeBuilder;
-        this.huffmanTreeSerializer = huffmanTreeSerializer;
-    }
 
     public void compress(InputStream inputStream, OutputStream outputStream) throws IOException {
         compress(inputStream, outputStream, false);
@@ -35,16 +35,16 @@ public class HuffmanCompressor {
         BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
 
         if (symbolWeightMap.size() == 1) {
-            bitOutputStream.write(zero());
+            bitOutputStream.write(SINGLE_SYMBOL_INDICATOR);
             bitOutputStream.writeLong(inputSize);
             bitOutputStream.writeByte(symbolWeightMap.keySet().iterator().next());
 
         } else {
-            bitOutputStream.write(one());
-            inputStream.reset();
-            HuffmanTree huffmanTree = huffmanTreeBuilder.build(symbolWeightMap);
+            bitOutputStream.write(MULTIPLE_SYMBOLS_INDICATOR);
             bitOutputStream.writeLong(inputSize);
+            HuffmanTree huffmanTree = huffmanTreeBuilder.build(symbolWeightMap);
             huffmanTreeSerializer.serialize(huffmanTree, bitOutputStream);
+            inputStream.reset();
             compressInputSymbols(inputStream, huffmanTree, bitOutputStream, symbolWeightMap, verbose);
         }
         bitOutputStream.flush();
